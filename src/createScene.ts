@@ -6,7 +6,7 @@ export function createScene(engine: BABYLON.Engine): BABYLON.Scene {
     const scene = new BABYLON.Scene(engine);
     scene.clearColor = BABYLON.Color4.FromHexString('#000000ff');
 
-    const skyboxMesh = createSkybox(scene);
+    const skyboxMesh = createSkybox(scene);         // obloha
     const groundMesh = BABYLON.Mesh.CreateGround(
         'ground',
         1000,
@@ -41,24 +41,27 @@ export function createScene(engine: BABYLON.Engine): BABYLON.Scene {
         },
     );
 
-    /*
-    for (let i = 0; i < 100; i++) {
-        const boxMesh = BABYLON.MeshBuilder.CreateBox(
-            'sphere',
-            { size: 1 },
+    for (let i = 0; i < 10; i++) {
+        const box = BABYLON.MeshBuilder.CreateSphere(
+            'Box',
+            {},
+            // { size: 1 },
             scene,
         );
-        boxMesh.position = new BABYLON.Vector3(
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.0) * 10,
-            (Math.random() - 0.5) * 20,
-        );
-        boxMesh.material = createMaterialColor('#cc5522',scene);
-        boxMesh.physicsImpostor = new BABYLON.PhysicsImpostor(
-            boxMesh,
+        box.position = new BABYLON.Vector3(
+            Math.sin(i / 180 * Math.PI) * 10,
+            1,
+            Math.cos(i / 180 * Math.PI) * 10);
+
+        box.rotation.y = i / 180 * Math.PI;
+
+        box.material = createMaterialColor('#2c30cc', scene);
+
+        box.physicsImpostor = new BABYLON.PhysicsImpostor(
+            box,
             BABYLON.PhysicsImpostor.BoxImpostor,
             {
-                mass: 80,
+                mass: 3,
                 friction: 0.5,
                 restitution: 0.5,
                 nativeOptions: {
@@ -67,8 +70,40 @@ export function createScene(engine: BABYLON.Engine): BABYLON.Scene {
                 },
             },
         );
+
+        // BABYLON.SceneLoader.Append(...)
+
+        // binds - dokumentace oimo.js
+
     }
-    */
+    //
+    // for (let i = 0; i < 100; i++) {
+    //     const boxMesh = BABYLON.MeshBuilder.CreateBox(
+    //         'sphere',
+    //         { size: 1 },
+    //         scene,
+    //     );
+    //     boxMesh.position = new BABYLON.Vector3(
+    //         (Math.random() - 0.5) * 20,
+    //         (Math.random() - 0.0) * 10,
+    //         (Math.random() - 0.5) * 20,
+    //     );
+    //     boxMesh.material = createMaterialColor('#cc5522',scene);
+    //     boxMesh.physicsImpostor = new BABYLON.PhysicsImpostor(
+    //         boxMesh,
+    //         BABYLON.PhysicsImpostor.BoxImpostor,
+    //         {
+    //             mass: 80,
+    //             friction: 0.5,
+    //             restitution: 0.5,
+    //             nativeOptions: {
+    //                 noSleep: true,
+    //                 move: true,
+    //             },
+    //         },
+    //     );
+    // }
+
 
     return scene;
 }

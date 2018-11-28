@@ -5,7 +5,7 @@
   "private": false,
   "scripts": {
     "start": "react-scripts-ts start",
-    "expose": "lt --port 3000 --subdomain=sample-babylon-oimo-app",
+    "expose": "lt --port 3000 --subdomain=sample-babylon-oimo-app-lsk",
     "build": "react-scripts-ts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -14,6 +14,7 @@
     "prettier-watch": "onchange \"**/*.{js,ts,tsx,json}\" -- npm run prettier"
   },
   "dependencies": {
+    "@babel/code-frame": "^7.0.0",
     "babylonjs": "^3.2.0",
     "cannon": "^0.6.2",
     "earcut": "^2.1.3",
